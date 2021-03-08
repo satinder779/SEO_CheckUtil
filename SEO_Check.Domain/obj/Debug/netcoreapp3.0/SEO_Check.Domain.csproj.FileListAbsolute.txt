@@ -1,0 +1,8 @@
+C:\Docs\SEO_Check\SEO_Check.Domain\bin\Debug\netcoreapp3.0\SEO_Check.Domain.deps.json
+C:\Docs\SEO_Check\SEO_Check.Domain\bin\Debug\netcoreapp3.0\SEO_Check.Domain.dll
+C:\Docs\SEO_Check\SEO_Check.Domain\bin\Debug\netcoreapp3.0\SEO_Check.Domain.pdb
+C:\Docs\SEO_Check\SEO_Check.Domain\obj\Debug\netcoreapp3.0\SEO_Check.Domain.AssemblyInfoInputs.cache
+C:\Docs\SEO_Check\SEO_Check.Domain\obj\Debug\netcoreapp3.0\SEO_Check.Domain.AssemblyInfo.cs
+C:\Docs\SEO_Check\SEO_Check.Domain\obj\Debug\netcoreapp3.0\SEO_Check.Domain.dll
+C:\Docs\SEO_Check\SEO_Check.Domain\obj\Debug\netcoreapp3.0\SEO_Check.Domain.pdb
+C:\Docs\SEO_Check\SEO_Check.Domain\obj\Debug\netcoreapp3.0\SEO_Check.Domain.csprojAssemblyReference.cache

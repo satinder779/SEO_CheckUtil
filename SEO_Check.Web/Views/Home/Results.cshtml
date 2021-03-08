@@ -1,0 +1,131 @@
+﻿@model SEO_Check.Web.Models.SearchEngineResultsModel
+
+@{
+	ViewData["Title"] = "Results";
+}
+
+<h1>Results</h1>
+
+
+<div class="container mt-5 table">
+	<div class="row">
+		<div class="col-sm text-center font-weight-bold border-bottom">
+			<h2>Google</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm">
+			Keywords
+		</div>
+		<div class="col-sm">
+			Target URL
+		</div>
+		<div class="col-sm">
+			Page Rank
+		</div>
+		<div class="col-sm">
+			Date
+		</div>
+	</div>
+</div>
+@foreach (var item in Model._googleSearchEngineResult)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.Keyword)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.TargetUrl)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.PageRank)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.DateCreated)
+			</div>
+		</div>
+	</div>
+}
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm text-center font-weight-bold border-bottom">
+			<h2>Bing</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm">
+			Keywords
+		</div>
+		<div class="col-sm">
+			Target URL
+		</div>
+		<div class="col-sm">
+			Page Rank
+		</div>
+		<div class="col-sm">
+			Date
+		</div>
+	</div>
+</div>
+@foreach (var item in Model._bingSearchEngineResult)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.Keyword)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.TargetUrl)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.PageRank)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.DateCreated)
+			</div>
+		</div>
+	</div>
+}
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-sm text-center font-weight-bold border-bottom">
+			<h2>Yahoo</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm">
+			Keywords
+		</div>
+		<div class="col-sm">
+			Target URL
+		</div>
+		<div class="col-sm">
+			Page Rank
+		</div>
+		<div class="col-sm">
+			Date
+		</div>
+	</div>
+</div>
+@foreach (var item in Model._yahooSearchEngineResult)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.Keyword)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.TargetUrl)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.PageRank)
+			</div>
+			<div class="col-sm">
+				@Html.DisplayFor(modelItem => item.DateCreated)
+			</div>
+		</div>
+	</div>
+}

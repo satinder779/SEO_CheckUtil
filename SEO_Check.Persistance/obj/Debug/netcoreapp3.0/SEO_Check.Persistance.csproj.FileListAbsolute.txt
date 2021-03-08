@@ -1,0 +1,13 @@
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Persistance.deps.json
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Persistance.dll
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.csprojAssemblyReference.cache
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.AssemblyInfoInputs.cache
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.AssemblyInfo.cs
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Domain.dll
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Persistance.runtimeconfig.json
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Persistance.runtimeconfig.dev.json
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Persistance.pdb
+C:\Docs\SEO_Check\SEO_Check.Persistance\bin\Debug\netcoreapp3.0\SEO_Check.Domain.pdb
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.csproj.CopyComplete
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.dll
+C:\Docs\SEO_Check\SEO_Check.Persistance\obj\Debug\netcoreapp3.0\SEO_Check.Persistance.pdb

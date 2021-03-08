@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "SEO_Check.Domain/1.0.0": {
+        "runtime": {
+          "SEO_Check.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SEO_Check.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

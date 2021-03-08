@@ -1,0 +1,43 @@
+﻿@model SEO_Check.Web.Models.SearchEngineIndexModel
+
+@{
+	ViewData["Title"] = "Search";
+}
+
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { encType = "multipart/form-data", name = "myform" }))
+{
+	<div class="form-group mt-5">
+		<p>
+			<span class="mt-5">Please select search engine to check page ranking</span>
+		</p>
+		@foreach (var item in Model.listSearchEngines)
+		{
+			<div class="form-check">
+				<input name="chkSelectedSearchEngine" type="checkbox" class="check" value="@item.Id" />
+				<label class="form-check-label">
+					@Html.DisplayFor(modelItem => item.SearchEngineName)
+				</label>
+			</div>
+		}
+	</div>
+
+	<div class="form-group mt-5">
+		Target Url
+		@Html.TextBoxFor(modelItem => modelItem.searchParams.TargetUrl, new { @class = "form-control col-6", required = "required" })
+		@Html.ValidationMessageFor(modelItem => modelItem.searchParams.TargetUrl, null, new { @class = "field-validation-error", data_valmsg_for = "Target Url" })
+
+	</div>
+	<div class="form-group">
+		Keyword
+		@Html.TextBoxFor(modelItem => modelItem.searchParams.Keyword, new { @class = "form-control col-6", required = "required" })
+		@Html.ValidationMessageFor(modelItem => modelItem.searchParams.Keyword, null, new { @class = "field-validation-error", data_valmsg_for = "Keyword" })
+
+		@Html.HiddenFor(modelItem => modelItem.searchParams.ResultsCount)
+	</div>
+	<button type="submit" class="btn btn-primary">Search</button>
+}
+
+
+
