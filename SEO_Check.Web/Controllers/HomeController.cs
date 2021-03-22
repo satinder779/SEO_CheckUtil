@@ -33,78 +33,30 @@ namespace SEO_Check.Web.Controllers
 
 		public IActionResult Index()
 		{
-			SearchEngineIndexModel model = new SearchEngineIndexModel();
-
-			var searchEngines = _unitOfWork.SearchEngineInfoRepository.GetAllSearchEngines().ToList();
-			model.listSearchEngines = _mapper.Map<List<SearchEngineInfoModel>>(searchEngines);
-			var configuredSearchParams = _unitOfWork.SearchParamRepository.GetAllSearchParams().ToList().OrderByDescending(d => d.DateCreated).FirstOrDefault();
-			model.searchParams = _mapper.Map<SearchParamsModel>(configuredSearchParams);
-			return View(model);
+			try
+			{
+				return View(GetIndexModel());
+			}
+			catch (Exception ex)
+			{
+				return RedirectToAction("Error");
+			}
 		}
 
 		[HttpPost]
 		public IActionResult Index(SearchEngineIndexModel model)
 		{
-			string selectedSearchEngine = Request.Form["chkSelectedSearchEngine"].ToString();
-			string[] selectedIds = selectedSearchEngine.Split(",");
-			var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(60));
-
-			if (!string.IsNullOrEmpty(model.searchParams.Keyword))
+			try
 			{
-				_unitOfWork.SearchParamRepository.AddSearchEngineParam(new SearchParams() { Id = Guid.NewGuid(), TargetUrl = model.searchParams.TargetUrl, Keyword = model.searchParams.Keyword, DateCreated = DateTime.Now });
+				string selectedSearchEngine = Request.Form["chkSelectedSearchEngine"].ToString();
+				string[] selectedIds = selectedSearchEngine.Split(",");
+				CheckSeoResults(selectedIds, model);
+				return RedirectToAction("Results");
 			}
-
-			foreach (var searchEngineId in selectedIds)
+			catch (Exception ex)
 			{
-				if (!string.IsNullOrEmpty(searchEngineId))
-				{
-					var _selectedEngine = _unitOfWork.SearchEngineInfoRepository.FindById(new Guid(searchEngineId)).FirstOrDefault();
-					if (_selectedEngine != null)
-					{
-						switch (_selectedEngine.SearchEngineName.ToUpper())
-						{
-							case _Google:
-								long pageRankGoogle;
-								bool isGoogleCacheExist = _cache.TryGetValue(_Google, out pageRankGoogle);
-								if (!isGoogleCacheExist)
-								{
-									pageRankGoogle = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
-									_cache.Set(_Google, pageRankGoogle, cacheEntryOptions);
-
-
-									_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankGoogle, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
-								}
-								break;
-							case _Bing:
-								long pageRankBing;
-								bool isBingCacheExist = _cache.TryGetValue(_Bing, out pageRankBing);
-								if (!isBingCacheExist)
-								{
-									pageRankBing = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
-									_cache.Set(_Bing, pageRankBing, cacheEntryOptions);
-
-
-									_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankBing, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
-								}
-								break;
-							case _Yahoo:
-								long pageRankYahoo;
-								bool isYahooCacheExist = _cache.TryGetValue(_Yahoo, out pageRankYahoo);
-								if (!isYahooCacheExist)
-								{
-									pageRankYahoo = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
-									_cache.Set(_Yahoo, pageRankYahoo, cacheEntryOptions);
-
-
-									_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankYahoo, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
-								}
-								break;
-						}
-					}
-				}
+				return RedirectToAction("Error");
 			}
-
-			return RedirectToAction("Results");
 		}
 
 		public IActionResult Results()
@@ -124,6 +76,93 @@ namespace SEO_Check.Web.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		public void CheckSeoResults(string[] selectedIds, SearchEngineIndexModel model)
+		{
+			try
+			{
+				var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(60));
+				if (!string.IsNullOrEmpty(model.searchParams.Keyword))
+				{
+					_unitOfWork.SearchParamRepository.AddSearchEngineParam(new SearchParams() { Id = Guid.NewGuid(), TargetUrl = model.searchParams.TargetUrl, Keyword = model.searchParams.Keyword, DateCreated = DateTime.Now });
+				}
+
+				foreach (var searchEngineId in selectedIds)
+				{
+					if (!string.IsNullOrEmpty(searchEngineId))
+					{
+						var _selectedEngine = _unitOfWork.SearchEngineInfoRepository.FindById(new Guid(searchEngineId)).FirstOrDefault();
+						if (_selectedEngine != null)
+						{
+							switch (_selectedEngine.SearchEngineName.ToUpper())
+							{
+								case _Google:
+									long pageRankGoogle;
+									bool isGoogleCacheExist = _cache.TryGetValue(_Google, out pageRankGoogle);
+									if (!isGoogleCacheExist)
+									{
+										pageRankGoogle = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
+										_cache.Set(_Google, pageRankGoogle, cacheEntryOptions);
+
+
+										_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankGoogle, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
+									}
+									break;
+								case _Bing:
+									long pageRankBing;
+									bool isBingCacheExist = _cache.TryGetValue(_Bing, out pageRankBing);
+									if (!isBingCacheExist)
+									{
+										pageRankBing = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
+										_cache.Set(_Bing, pageRankBing, cacheEntryOptions);
+
+
+										_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankBing, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
+									}
+									break;
+								case _Yahoo:
+									long pageRankYahoo;
+									bool isYahooCacheExist = _cache.TryGetValue(_Yahoo, out pageRankYahoo);
+									if (!isYahooCacheExist)
+									{
+										pageRankYahoo = _unitOfWork.GoogleSearch.GetPageRank(new Domain.SearchDTO.GoogleSearchRequestDTO() { Keyword = model.searchParams.Keyword, TargetURL = model.searchParams.TargetUrl, ResultsCount = _selectedEngine.ResultsCount });
+										_cache.Set(_Yahoo, pageRankYahoo, cacheEntryOptions);
+
+
+										_unitOfWork.SearchResultHistoryRepository.AddSearchResultHistory(new SearchResultHistory() { Id = Guid.NewGuid(), Keyword = model.searchParams.Keyword, TargetUrl = model.searchParams.TargetUrl, PageRank = pageRankYahoo, DateCreated = DateTime.Now, SearchEngineId = new Guid(searchEngineId) });
+									}
+									break;
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(String.Format(" Message : {0} | Stack Trace : {1}.", ex.Message, ex.StackTrace));
+				throw ex;
+			}
+
+		}
+
+		public SearchEngineIndexModel GetIndexModel()
+		{
+			try
+			{
+				SearchEngineIndexModel model = new SearchEngineIndexModel();
+
+				var searchEngines = _unitOfWork.SearchEngineInfoRepository.GetAllSearchEngines().ToList();
+				model.listSearchEngines = _mapper.Map<List<SearchEngineInfoModel>>(searchEngines);
+				var configuredSearchParams = _unitOfWork.SearchParamRepository.GetAllSearchParams().ToList().OrderByDescending(d => d.DateCreated).FirstOrDefault();
+				model.searchParams = _mapper.Map<SearchParamsModel>(configuredSearchParams);
+				return model;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(String.Format(" Message : {0} | Stack Trace : {1}.", ex.Message, ex.StackTrace));
+				throw ex;
+			}
 		}
 	}
 }

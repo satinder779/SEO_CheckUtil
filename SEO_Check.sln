@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO_Check.Tests", "SEO_Check.Tests\SEO_Check.Tests.csproj", "{D50E6A18-A3F2-4093-9998-104B2DBA456E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEO_Check.Persistance", "SEO_Check.Persistance\SEO_Check.Persistance.csproj", "{5BD8F250-D4DC-4FBC-A6D7-DD5E34103B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO_Check.Persistance", "SEO_Check.Persistance\SEO_Check.Persistance.csproj", "{5BD8F250-D4DC-4FBC-A6D7-DD5E34103B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEO_Check.Domain", "SEO_Check.Domain\SEO_Check.Domain.csproj", "{0793D6D6-4AA9-438B-8CE3-A6F9186D4151}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO_Check.Domain", "SEO_Check.Domain\SEO_Check.Domain.csproj", "{0793D6D6-4AA9-438B-8CE3-A6F9186D4151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SEO_Check.Web", "SEO_Check.Web\SEO_Check.Web.csproj", "{0CE01E2A-E43D-4D35-968D-6E3AF485EA89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO_Check.Web", "SEO_Check.Web\SEO_Check.Web.csproj", "{0CE01E2A-E43D-4D35-968D-6E3AF485EA89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEO_Check.Web.Tests", "SEO_Check.Web.Tests\SEO_Check.Web.Tests.csproj", "{CEA54EBD-8F92-4EA7-BD27-B57F0804AD1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D50E6A18-A3F2-4093-9998-104B2DBA456E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D50E6A18-A3F2-4093-9998-104B2DBA456E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D50E6A18-A3F2-4093-9998-104B2DBA456E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D50E6A18-A3F2-4093-9998-104B2DBA456E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BD8F250-D4DC-4FBC-A6D7-DD5E34103B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BD8F250-D4DC-4FBC-A6D7-DD5E34103B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BD8F250-D4DC-4FBC-A6D7-DD5E34103B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{0CE01E2A-E43D-4D35-968D-6E3AF485EA89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CE01E2A-E43D-4D35-968D-6E3AF485EA89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CE01E2A-E43D-4D35-968D-6E3AF485EA89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA54EBD-8F92-4EA7-BD27-B57F0804AD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA54EBD-8F92-4EA7-BD27-B57F0804AD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA54EBD-8F92-4EA7-BD27-B57F0804AD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA54EBD-8F92-4EA7-BD27-B57F0804AD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
